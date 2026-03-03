@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tauri App</title>
+    <script type="module" src="/src/main.ts" defer></script>
+  </head>
+
+  <body>
+    <div class="app-container">
+      <aside class="sidebar">
+        <button class="nav-btn active" data-target="home">Главная</button>
+        <button class="nav-btn" data-target="sites">Список сайтов</button>
+        <button class="nav-btn" data-target="settings">Настройки</button>
+      </aside>
+
+      <main class="content">
+        
+        <section id="home" class="view active">
+          <div class="card">
+            <div class="preset-selection">
+              <label for="preset-select">Выберите пресет:</label>
+              <select id="preset-select" class="custom-select">
+                <option value="">Загрузка пресетов...</option>
+              </select>
+            </div>
+            <button class="primary-btn" id="connect-btn">Включить</button>
+          </div>
+        </section>
+
+        <section id="sites" class="view">
+          <h1>Список сайтов</h1>
+          <p>Введите домены по одному на строку:</p>
+          <textarea id="sites-editor" spellcheck="false"></textarea>
+          <div class="actions">
+            <button class="default-btn" id="save-sites-btn">Сохранить изменения</button>
+            <div class="shortcut-hint">Или нажмите <kbd>Ctrl</kbd> + <kbd>S</kbd></div>
+            <span id="save-status"></span>
+          </div>  
+        </section>
+
+        <section id="settings" class="view">
+          <h1>Zapret</h1>
+          <div class="settings-list">
+            <div class="setting-item">
+              <span>Game Filter</span>
+              <label class="switch">
+                <input type="checkbox" id="settings-game-filter">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          <h1>Приложение</h1>
+          <div class="settings-list">
+            <div class="setting-item">
+              <span>Темная тема</span>
+              <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <span>Автозапуск</span>
+              <label class="switch">
+                <input type="checkbox" id="settings-auto-start">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </body>
+</html>

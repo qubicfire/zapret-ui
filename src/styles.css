@@ -1,0 +1,311 @@
+/* Основные переменные для цветов (Fluent Design стиль) */
+:root {
+  --bg-color: #f6f6f6;
+  --sidebar-bg: #eeeeee;
+  --text-color: #0f0f0f;
+  --accent-color: #1c6ead;
+  --accent-hover: #106ebe;
+  --card-bg: #ffffff;
+  --border-color: #d1d1d1;
+  
+  font-family: "Segoe UI Variable", "Segoe UI", Inter, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color: var(--text-color);
+  background-color: var(--bg-color);
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; 
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 240px;
+  background-color: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
+  gap: 4px;
+  border-right: 1px solid var(--border-color);
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  padding: 10px 16px;
+  text-align: left;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95em;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.nav-btn.active {
+  background-color: var(--card-bg);
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  color: var(--accent-color);
+}
+
+/* Основная область контента */
+.content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+.view {
+  display: none;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.view.active {
+  display: block;
+}
+
+.centered-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Элементы управления */
+h1 {
+  margin-top: 0;
+  font-weight: 600;
+  font-size: 1.8em;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 20px;
+}
+
+.default-btn {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 24px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.default-btn:hover {
+  background-color: var(--accent-hover);
+}
+
+.shortcut-hint {
+  font-size: 0.75rem;
+  color: #888;
+  user-select: none;
+  pointer-events: none; /* Чтобы надпись не мешала кликам */
+}
+
+.primary-btn {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%; /* Делает круг */
+  border: none;
+  background: var(--accent-color);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(0, 120, 212, 0.3);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  outline: none;
+  user-select: none;
+}
+
+.primary-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(0, 120, 212, 0.5);
+  background-color: var(--accent-hover);
+}
+
+.primary-btn:active {
+  transform: scale(0.95);
+}
+
+/* Настройки и Ползунки (Toggle Switches) */
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.settings-list:last-child {
+  margin-bottom: 0;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--card-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 22px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .3s;
+  border-radius: 22px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px; width: 16px;
+  left: 3px; bottom: 3px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--accent-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+#sites {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+}
+
+#sites.active {
+  display: flex;
+}
+
+#sites-editor {
+  flex: 1; /* Растягивается на всё окно */
+  margin: 15px 0;
+  padding: 15px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-family: 'Consolas', 'Monaco', monospace; /* Моноширинный шрифт для сайтов */
+  font-size: 14px;
+  resize: none; /* Запрещаем ручное изменение размера, так как у нас flex */
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#save-status {
+  font-size: 0.9em;
+  color: #28a745;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #1c1c1c;
+    --sidebar-bg: #252525;
+    --text-color: #ffffff;
+    --card-bg: #2d2d2d;
+    --border-color: #3d3d3d;
+    --accent-color: #309ed4;
+    --accent-hover: #0b69b1;
+  }
+}
+
+.preset-selection {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.preset-selection label {
+  font-size: 0.85rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.custom-select {
+  background: #2a2a2a;
+  color: white;
+  border: 1px solid #444;
+  padding: 10px 15px;
+  border-radius: 8px;
+  width: 250px;
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.custom-select:focus {
+  border-color: var(--accent-color);
+}
+
+.custom-select option {
+  background: #2a2a2a;
+}
