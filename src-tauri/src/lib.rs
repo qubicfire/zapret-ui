@@ -93,7 +93,7 @@ fn save_sites_list(content: String, state: tauri::State<AppState>) -> Result<(),
 
 fn update_autostart(enabled: bool) -> Result<(), String> {
     if cfg!(target_os = "windows") {
-        let app_path = env::current_exe().map_err(|e| e.to_string())?;
+        let app_path = fs::canonicalize("../zapret-update.exe").map_err(|e| e.to_string())?;
         let hkcu = winreg::RegKey::predef(winreg::enums::HKEY_CURRENT_USER);
         let path = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
         let (key, _) = hkcu.create_subkey(path).map_err(|e| e.to_string())?;
@@ -180,10 +180,10 @@ fn enable_zapret(selectedPreset: String, state: tauri::State<AppState>) -> Resul
     println!("Starting zapret process with preset: {}", preset_path.display());
 
     let cmd = Command::new("cmd")
-        .args(["/C", &selectedPreset])
+        .args(["/K", &selectedPreset])
         .current_dir(&base_path)
         .env("DIR", &base_path)
-        .creation_flags(0x08000000) // CREATE_NO_WINDOW
+        //.creation_flags(0x08000000) // CREATE_NO_WINDOW
         .spawn()
         .map_err(|e| e.to_string())?;
     
